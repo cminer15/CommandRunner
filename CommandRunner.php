@@ -1,7 +1,7 @@
 <?php
 
 namespace CommandRunner;
-/*Haven't added any V */
+
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
@@ -11,13 +11,14 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 
-use CommandRunner\provider\MySQL;
+use CommandRunner\MySQL;
 
 class MainClass extends PluginBase implements Listener{
 
 	public function onLoad(){
 		$this->getLogger()->info(TextFormat::WHITE . "CommandRunner loaded!");
 	}
+        //Need to do MySWL file
 
 	public function onEnable(){
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
