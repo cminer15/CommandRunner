@@ -1,7 +1,7 @@
 <?php
 
 namespace CommandRunner;
-//Haven't added any V
+/*Haven't added any V */
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\event\Listener;
