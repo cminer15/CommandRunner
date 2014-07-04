@@ -20,7 +20,6 @@ class MainClass extends PluginBase implements Listener{
 		$this->getLogger()->info(TextFormat::WHITE . "CommandRunner loaded!");
 	}
         //Need to do MySWL file
-        //Need to do basic definitions^
 	public function onEnable(){
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		$this->getLogger()->info(TextFormat::Black . "CommandRunner is now in use on this server!");
