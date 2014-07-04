@@ -66,7 +66,8 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
 					case "set":
 						$command = array_shift($args);
 						$this->MySQL->createArea($owner, $name, $command, $x1, $y1, $z1, $x2, $y2, $z2,);
-						
+						//I'm in the process of adding names to each selection, 
+                                                //like /cr <command> <name>
 						if (is_null($command)) {
 							$sender->sendMessage("Usage: /cr set <command>");
 							}
