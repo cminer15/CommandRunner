@@ -81,7 +81,7 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
                 return false;
 		}
 	}
-//Special Thanks to limbo! V
+//Special Thanks to Limbo! V
 function onMove(EntityMoveEvent $event, $x1, $y1, $z1, $x2, $y2, $z2, $command){
 	if($event->getEntity() instanceof Player){
 		$minx = min($x1,$x2);
