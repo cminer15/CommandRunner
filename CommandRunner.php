@@ -75,8 +75,6 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
 						}
 
 					default:
-                        $sender->sendMessage("\"/cr $subCommand\" dose not exist");
-						break;
 				}
 				return true;
             default:
