@@ -11,23 +11,25 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\entity\EntityMoveEvent
-
+//This is part of the MySQL table creating function.
 use AreaCommand\MySQL;
 
 class AreaCommandPlugin extends PluginBase implements Listener{
 
 	public function onLoad(){
-		$this->getLogger()->info(TextFormat::WHITE . "AreaCommand loaded!");
+		$this->getLogger()->info(TextFormat::WHITE . "AreaCommand loading...!");
+		$this->MySQL = new MySQL($this);
+		$this->getLogger()->info(TextFormat::Green . "AreaCommand loaded!");
 	}
         //Need to do MySWL file
 	public function onEnable(){
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		$this->getLogger()->info(TextFormat::Black . "AreaCommand is now in use on this server!");
 		$this-> api->console->alias("ac", "AreaCommand");
-		$this->MySQL = new MySQL($this);
     }
 
 	public function onDisable(){
+		$this->MySQL->close();
 		$this->getLogger()->info(TextFormat::DARK_RED . "You have disabled AreaCommand!");
 	}
 public function onCommand(CommandSender $sender, Command $command, $label, array $args)
@@ -67,7 +69,14 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
 					case "set":
 						$command = array_shift($args);
 						$name = array_shift($args);
-						$this->MySQL->aceateArea($owner, $name, $command, $x1, $y1, $z1, $x2, $y2, $z2, $issuerworld);
+						$this->MySQL->checkName($name) = $pname;
+						if ($pname != $name) {
+						$this->MySQL->createArea($owner, $name, $command, $x1, $y1, $z1, $x2, $y2, $z2, $issuerworld);
+						$sender->sendMessage("[AreaCommander] Area created!");
+						 }
+						else {
+							$sender->sendMessage("[AreaCommander] Area already exists!");
+						}
 						if (is_null($command)) {
 							$sender->sendMessage("Usage: /ac set <command> <nameofselection>");
 							}
@@ -81,9 +90,17 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
                 return false;
 		}
 	}
-//Special Thanks to Limbo! V
-function onMove(EntityMoveEvent $event, $x1, $y1, $z1, $x2, $y2, $z2, $command, $issuerworld){
+//Special Thanks to Limbo! (For part of this) V
+function onMove(EntityMoveEvent $event){
 	if($event->getEntity() instanceof Player){
+		$x1 = $this->MySQL->checkCoords($x1);
+		$x2 = $this->MySQL->checkCoords($x2);
+		$y1 = $this->MySQL->checkCoords($y1);
+		$y2 = $this->MySQL->checkCoords($y2);
+		$z1 = $this->MySQL->checkCoords($z1);
+		$z2 = $this->MySQL->checkCoords($z2);
+		$command = $this->MySQL->checkCommand($command);
+		$issuerworld = $this->MySQL->checkWorld($issuerworld);
 		$minx = min($x1,$x2);
 		$maxx = max($x,$x2);
 		$miny = min($y1,$y2);
