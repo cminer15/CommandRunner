@@ -10,22 +10,22 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
-use pocketmine\event\entity\EntityMoveEvent
+use pocketmine\event\entity\EntityMoveEvent;
 //This is part of the MySQL table creating function.
 use AreaCommand\MySQL;
 
 class AreaCommandPlugin extends PluginBase implements Listener{
 
 	public function onLoad(){
+		$this->getLogger()->info(TextFormat::WHITE . "You have installed AreaCommand, enable the plugin to use it.");
+	}
+        //Need to do MySQL file
+	public function onEnable(){
 		$this->getLogger()->info(TextFormat::WHITE . "AreaCommand loading...!");
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		$this-> api->console->alias("ac", "AreaCommand");
 		$this->MySQL = new MySQL($this);
 		$this->getLogger()->info(TextFormat::Green . "AreaCommand loaded!");
-	}
-        //Need to do MySWL file
-	public function onEnable(){
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getLogger()->info(TextFormat::Black . "AreaCommand is now in use on this server!");
-		$this-> api->console->alias("ac", "AreaCommand");
     }
 
 	public function onDisable(){
