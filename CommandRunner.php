@@ -48,7 +48,7 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
 					case "help":
 						$sender->sendMessage("/ac help Gives you instructions");
 						$sender->sendMessage("/ac pos1 Sets your first block position");
-						$sender->sendMessage("/ac Sets your secound block position");
+						$sender->sendMessage("/ac pos2 Sets your secound block position");
 						$sender->sendMessage("/ac set <command> Sets what command to run when player goes through pos1 and pos2, use @player for their username.");
                         break;
 
