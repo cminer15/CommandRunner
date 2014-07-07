@@ -90,7 +90,7 @@ public function onCommand(CommandSender $sender, Command $command, $label, array
                 return false;
 		}
 	}
-//Special Thanks to Limbo! (For part of this) V
+//Special Thanks to Lambo! (For part of this) V
 function onMove(EntityMoveEvent $event){
 	if($event->getEntity() instanceof Player){
 		$x1 = $this->MySQL->checkCoords($x1);
